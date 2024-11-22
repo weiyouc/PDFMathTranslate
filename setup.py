@@ -14,8 +14,8 @@ setup(
     license="AGPLv3",
     version=__version__,
     author=__author__,
-    author_email="byaidux@gmail.com",
-    url="https://github.com/Byaidu/PDFMathTranslate",
+    author_email="weiyouc@gmail.com",
+    url="https://github.com/weiyouc/PDFMathTranslate",
     packages=["pdf2zh"],
     install_requires=[
         "charset-normalizer",

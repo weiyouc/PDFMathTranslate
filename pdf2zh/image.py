@@ -10,17 +10,17 @@ except ImportError:
     # Literal was introduced in Python 3.8
     from typing_extensions import Literal  # type: ignore[assignment]
 
-from pdf2zh.jbig2 import JBIG2StreamReader, JBIG2StreamWriter
-from pdf2zh.layout import LTImage
-from pdf2zh.pdfcolor import (
+from jbig2 import JBIG2StreamReader, JBIG2StreamWriter
+from layout import LTImage
+from pdfcolor import (
     LITERAL_DEVICE_CMYK,
     LITERAL_DEVICE_GRAY,
     LITERAL_DEVICE_RGB,
     LITERAL_INLINE_DEVICE_GRAY,
     LITERAL_INLINE_DEVICE_RGB,
 )
-from pdf2zh.pdfexceptions import PDFValueError
-from pdf2zh.pdftypes import (
+from pdfexceptions import PDFValueError
+from pdftypes import (
     LITERALS_DCT_DECODE,
     LITERALS_FLATE_DECODE,
     LITERALS_JBIG2_DECODE,

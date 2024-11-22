@@ -16,8 +16,8 @@ from typing import (
     Union,
 )
 
-from pdf2zh import psexceptions, settings
-from pdf2zh.utils import choplist
+import psexceptions
+from utils import choplist
 
 log = logging.getLogger(__name__)
 

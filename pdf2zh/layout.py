@@ -15,12 +15,12 @@ from typing import (
     cast,
 )
 
-from pdf2zh.pdfcolor import PDFColorSpace
-from pdf2zh.pdfexceptions import PDFTypeError, PDFValueError
-from pdf2zh.pdffont import PDFFont
-from pdf2zh.pdfinterp import Color, PDFGraphicState
-from pdf2zh.pdftypes import PDFStream
-from pdf2zh.utils import (
+from pdfcolor import PDFColorSpace
+from pdfexceptions import PDFTypeError, PDFValueError
+from pdffont import PDFFont
+from pdfinterp import Color, PDFGraphicState
+from pdftypes import PDFStream
+from utils import (
     INF,
     LTComponentT,
     Matrix,

@@ -2,10 +2,10 @@ import logging
 import re
 from typing import Dict, Iterable, Optional, cast
 
-from pdf2zh.glyphlist import glyphname2unicode
-from pdf2zh.latin_enc import ENCODING
-from pdf2zh.pdfexceptions import PDFKeyError
-from pdf2zh.psparser import PSLiteral
+from glyphlist import glyphname2unicode
+from latin_enc import ENCODING
+from pdfexceptions import PDFKeyError
+from psparser import PSLiteral
 
 HEXADECIMAL = re.compile(r"[0-9a-fA-F]+")
 

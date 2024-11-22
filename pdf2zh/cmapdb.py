@@ -32,11 +32,11 @@ from typing import (
     cast,
 )
 
-from pdf2zh.encodingdb import name2unicode
-from pdf2zh.pdfexceptions import PDFException, PDFTypeError
-from pdf2zh.psexceptions import PSEOF, PSSyntaxError
-from pdf2zh.psparser import KWD, PSKeyword, PSLiteral, PSStackParser, literal_name
-from pdf2zh.utils import choplist, nunpack
+from encodingdb import name2unicode
+from pdfexceptions import PDFException, PDFTypeError
+from psexceptions import PSEOF, PSSyntaxError
+from psparser import KWD, PSKeyword, PSLiteral, PSStackParser, literal_name
+from utils import choplist, nunpack
 
 log = logging.getLogger(__name__)
 

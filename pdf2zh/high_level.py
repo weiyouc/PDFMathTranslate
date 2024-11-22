@@ -6,20 +6,20 @@ from io import StringIO
 from typing import Any, BinaryIO, Container, Iterator, Optional, cast
 import tqdm
 
-from pdf2zh.converter import (
+from converter import (
     HOCRConverter,
     HTMLConverter,
     PDFPageAggregator,
     TextConverter,
     XMLConverter,
 )
-from pdf2zh.image import ImageWriter
-from pdf2zh.layout import LAParams, LTPage
-from pdf2zh.pdfdevice import PDFDevice, TagExtractor
-from pdf2zh.pdfexceptions import PDFValueError
-from pdf2zh.pdfinterp import PDFPageInterpreter, PDFResourceManager
-from pdf2zh.pdfpage import PDFPage
-from pdf2zh.utils import AnyIO, FileOrName, open_filename
+from image import ImageWriter
+from layout import LAParams, LTPage
+from pdfdevice import PDFDevice, TagExtractor
+from pdfexceptions import PDFValueError
+from pdfinterp import PDFPageInterpreter, PDFResourceManager
+from pdfpage import PDFPage
+from utils import AnyIO, FileOrName, open_filename
 import numpy as np
 from pymupdf import Document
 
@@ -51,9 +51,9 @@ def extract_text_to_fp(
     service: str = "",
     **kwargs: Any,
 ) -> None:
-    """Parses text from inf-file and writes to outfp file-like object.
+    """Parses text from inf and writes to outfp file-like object.
 
-    Takes loads of optional arguments but the defaults are somewhat sane.
+    Takes loads of optional arguments but the defaults are somewhat same.
     Beware laparams: Including an empty LAParams is not the same as passing
     None!
 

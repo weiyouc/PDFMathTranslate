@@ -2,12 +2,12 @@ import logging
 from io import BytesIO
 from typing import TYPE_CHECKING, BinaryIO, Optional, Union
 
-from pdf2zh import settings
-from pdf2zh.casting import safe_int
-from pdf2zh.pdfexceptions import PDFException
-from pdf2zh.pdftypes import PDFObjRef, PDFStream, dict_value, int_value
-from pdf2zh.psexceptions import PSEOF
-from pdf2zh.psparser import KWD, PSKeyword, PSStackParser
+import settings
+from casting import safe_int
+from pdfexceptions import PDFException
+from pdftypes import PDFObjRef, PDFStream, dict_value, int_value
+from psexceptions import PSEOF
+from psparser import KWD, PSKeyword, PSStackParser
 
 if TYPE_CHECKING:
     from pdf2zh.pdfdocument import PDFDocument

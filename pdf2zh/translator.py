@@ -136,25 +136,33 @@ class OllamaTranslator(BaseTranslator):
         lang_in='en' if lang_in=='auto' else lang_in
         super().__init__(service, lang_out, lang_in, model)
         self.options = {"temperature": 0}  # 随机采样可能会打断公式标记
-        # OLLAMA_HOST
         self.client = ollama.Client()
-
+        
     def translate(self, text):
-        response = self.client.chat(
-            model=self.model,
-            options=self.options,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "You are a professional,authentic machine translation engine.",
-                },
-                {
-                    "role": "user",
-                    "content": f"Translate the following markdown source text to {self.lang_out}. Keep the formula notation $v*$ unchanged. Output translation directly without any additional text.\nSource Text: {text}\nTranslated Text:",
-                },
-            ],
-        )
-        return response["message"]["content"].strip()
+        system_prompt = """You are a professional translator for English to Chinese translation.
+        Requirements:
+        - Output only the translated text
+        - Do not include words like "翻译:" or "Translation:" or "译文:" or "中文:" or "Chinese:" or "转换:"
+        - Preserve all mathematical formulas and symbols exactly as they appear
+        - Do not add any comments, questions, or explanations
+        - Do not respond conversationally
+        """
+        
+        user_prompt = f"Translate: {text}"
+        
+        response = self.client.chat(model=self.model, 
+                                  messages=[
+                                      {"role": "system", "content": system_prompt},
+                                      {"role": "user", "content": user_prompt}
+                                  ])
+        
+        translated_text = response["message"]["content"].strip()
+        
+        # Post-process to remove any remaining "翻译:" or similar prefixes
+        cleaned_text = re.sub(r'^(翻译：|翻译:|Translation:|译文：|译文:|转换：|转换:)\s*', '', translated_text)
+        
+        return cleaned_text
+
 
 class OpenAITranslator(BaseTranslator):
     def __init__(self, service, lang_out, lang_in, model):

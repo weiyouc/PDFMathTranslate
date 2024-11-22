@@ -18,8 +18,8 @@ import concurrent.futures
 import numpy as np
 import unicodedata
 from tenacity import retry, wait_fixed
-from pdf2zh import cache
-from pdf2zh.translator import (
+import cache
+from translator import (
     BaseTranslator,
     GoogleTranslator,
     DeepLTranslator,
@@ -31,9 +31,9 @@ from pdf2zh.translator import (
 def remove_control_characters(s):
     return "".join(ch for ch in s if unicodedata.category(ch)[0]!="C")
 
-from pdf2zh import utils
-from pdf2zh.image import ImageWriter
-from pdf2zh.layout import (
+import utils
+from image import ImageWriter
+from layout import (
     LAParams,
     LTAnno,
     LTChar,
@@ -54,14 +54,14 @@ from pdf2zh.layout import (
     LTTextLine,
     TextGroupElement,
 )
-from pdf2zh.pdfcolor import PDFColorSpace
-from pdf2zh.pdfdevice import PDFTextDevice
-from pdf2zh.pdfexceptions import PDFValueError
-from pdf2zh.pdffont import PDFFont, PDFUnicodeNotDefined, PDFCIDFont
-from pdf2zh.pdfinterp import PDFGraphicState, PDFResourceManager
-from pdf2zh.pdfpage import PDFPage
-from pdf2zh.pdftypes import PDFStream
-from pdf2zh.utils import (
+from pdfcolor import PDFColorSpace
+from pdfdevice import PDFTextDevice
+from pdfexceptions import PDFValueError
+from pdffont import PDFFont, PDFUnicodeNotDefined, PDFCIDFont
+from pdfinterp import PDFGraphicState, PDFResourceManager
+from pdfpage import PDFPage
+from pdftypes import PDFStream
+from utils import (
     AnyIO,
     Matrix,
     PathSegment,

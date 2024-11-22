@@ -15,16 +15,17 @@ from typing import (
 )
 from warnings import warn
 
-from pdf2zh import pdfexceptions, settings
-from pdf2zh.ascii85 import ascii85decode, asciihexdecode
-from pdf2zh.ccitt import ccittfaxdecode
-from pdf2zh.lzw import lzwdecode
-from pdf2zh.psparser import LIT, PSObject
-from pdf2zh.runlength import rldecode
-from pdf2zh.utils import apply_png_predictor
+import pdfexceptions
+from ascii85 import ascii85decode, asciihexdecode
+from ccitt import ccittfaxdecode
+from lzw import lzwdecode
+from psparser import LIT, PSObject
+from runlength import rldecode
+from utils import apply_png_predictor
+import settings
 
 if TYPE_CHECKING:
-    from pdf2zh.pdfdocument import PDFDocument
+    from pdfdocument import PDFDocument
 
 logger = logging.getLogger(__name__)
 

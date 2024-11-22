@@ -1,9 +1,9 @@
 from typing import Any, Iterable, List, Optional, Tuple
 
-from pdf2zh import settings
-from pdf2zh.pdfparser import PDFSyntaxError
-from pdf2zh.pdftypes import dict_value, int_value, list_value
-from pdf2zh.utils import choplist
+import settings
+from pdfparser import PDFSyntaxError
+from pdftypes import dict_value, int_value, list_value
+from utils import choplist
 
 
 class NumberTree:

@@ -48,7 +48,7 @@ def translate(file_path, service, progress=gr.Progress()):
             "Google": "google",
             "DeepL": "deepl",
             "DeepLX": "deeplx",
-            "Ollama": "ollama:gemma2",
+            "Ollama": "ollama:qwen2.5:7b",
         }
         selected_service = service_map.get(service, "google")
         lang_to = "zh"
@@ -128,7 +128,7 @@ with gr.Blocks(title="PDF Translation") as app:
             service = gr.Dropdown(
                 label="Service",
                 choices=["Google", "DeepL", "DeepLX", "Ollama"],
-                value="Google",
+                value="Ollama",
             )
 
             file_input = gr.File(
@@ -142,9 +142,8 @@ with gr.Blocks(title="PDF Translation") as app:
             translate_btn = gr.Button("Translate", variant="primary", visible=False)
             # add a text description
             gr.Markdown(
-                """*Note: Please make sure that [pdf2zh](https://github.com/Byaidu/PDFMathTranslate) is correctly configured.*
-                GUI implemented by: [Rongxin](https://github.com/reycn)
-                [Early Version]
+                """
+                [Version 1.0]
                 """
             )
 

@@ -24,10 +24,10 @@ from typing import (
     cast,
 )
 
-from pdf2zh.pdfexceptions import PDFTypeError, PDFValueError
+from pdfexceptions import PDFTypeError, PDFValueError
 
 if TYPE_CHECKING:
-    from pdf2zh.layout import LTComponent
+    from layout import LTComponent
 
 import charset_normalizer  # For str encoding detection
 

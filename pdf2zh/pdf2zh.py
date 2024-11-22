@@ -13,8 +13,8 @@ import pymupdf
 import tempfile
 import urllib.request
 
-from pdf2zh import __version__
-from pdf2zh.pdfexceptions import PDFValueError
+__version__ = "1.7.2"
+
 from typing import Any, Container, Iterable, List, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -22,6 +22,10 @@ if TYPE_CHECKING:
     from pdf2zh.layout import LAParams
 
 OUTPUT_TYPES = ((".htm", "html"), (".html", "html"), (".xml", "xml"), (".tag", "tag"))
+
+# Define the exception class here instead
+class PDFValueError(ValueError):
+    pass
 
 
 def setup_log() -> None:
@@ -70,7 +74,7 @@ def extract_text(
     **kwargs: Any,
 ) -> AnyIO:
     import doclayout_yolo
-    import pdf2zh.high_level
+    import high_level
 
     if not files:
         raise PDFValueError("Must provide files to work upon!")
@@ -88,8 +92,9 @@ def extract_text(
     model = doclayout_yolo.YOLOv10(pth)
 
     for file in files:
-
+        print(f"Processing file: {file}")
         filename = os.path.splitext(os.path.basename(file))[0]
+        print(f"Base filename: {filename}")
 
         doc_en = pymupdf.open(file)
         page_count=doc_en.page_count
@@ -113,7 +118,7 @@ def extract_text(
         doc_en.save(f'{filename}-en.pdf')
 
         with open(f'{filename}-en.pdf', "rb") as fp:
-            obj_patch:dict=pdf2zh.high_level.extract_text_to_fp(fp, **locals())
+            obj_patch:dict=high_level.extract_text_to_fp(fp, **locals())
 
         for obj_id,ops_new in obj_patch.items():
             # ops_old=doc_en.xref_stream(obj_id)
@@ -127,12 +132,15 @@ def extract_text(
         doc_dual.insert_file(doc_zh)
         for id in range(page_count):
             doc_dual.move_page(page_count+id,id*2+1)
+        print(f"Saving Chinese version to: {filename}-zh.pdf")
         doc_zh.save(f'{filename}-zh.pdf',deflate=1)
+        print(f"Saving dual version to: {filename}-dual.pdf")
         doc_dual.save(f'{filename}-dual.pdf',deflate=1)
         doc_zh.close()
         doc_dual.close()
 
         os.remove(f'{filename}-en.pdf')
+        print("Processing complete!")
 
     return
 

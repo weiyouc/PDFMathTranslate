@@ -16,8 +16,8 @@ from typing import (
     cast,
 )
 
-from pdf2zh import settings
-from pdf2zh.cmapdb import (
+import settings
+from cmapdb import (
     CMap,
     CMapBase,
     CMapDB,
@@ -26,10 +26,10 @@ from pdf2zh.cmapdb import (
     IdentityUnicodeMap,
     UnicodeMap,
 )
-from pdf2zh.encodingdb import EncodingDB, name2unicode
-from pdf2zh.fontmetrics import FONT_METRICS
-from pdf2zh.pdfexceptions import PDFException, PDFKeyError, PDFValueError
-from pdf2zh.pdftypes import (
+from encodingdb import EncodingDB, name2unicode
+from fontmetrics import FONT_METRICS
+from pdfexceptions import PDFException, PDFKeyError, PDFValueError
+from pdftypes import (
     PDFStream,
     dict_value,
     int_value,
@@ -39,8 +39,8 @@ from pdf2zh.pdftypes import (
     resolve_all,
     stream_value,
 )
-from pdf2zh.psexceptions import PSEOF
-from pdf2zh.psparser import (
+from psexceptions import PSEOF
+from psparser import (
     KWD,
     LIT,
     PSKeyword,
@@ -48,10 +48,10 @@ from pdf2zh.psparser import (
     PSStackParser,
     literal_name,
 )
-from pdf2zh.utils import Matrix, Point, Rect, apply_matrix_norm, choplist, nunpack
+from utils import Matrix, Point, Rect, apply_matrix_norm, choplist, nunpack
 
 if TYPE_CHECKING:
-    from pdf2zh.pdfinterp import PDFResourceManager
+    from pdfinterp import PDFResourceManager
 
 log = logging.getLogger(__name__)
 

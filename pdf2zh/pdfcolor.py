@@ -1,7 +1,7 @@
 import collections
 from typing import Dict
 
-from pdf2zh.psparser import LIT
+from psparser import LIT
 
 LITERAL_DEVICE_GRAY = LIT("DeviceGray")
 LITERAL_DEVICE_RGB = LIT("DeviceRGB")

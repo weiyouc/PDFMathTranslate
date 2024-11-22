@@ -4,13 +4,13 @@ from io import BytesIO
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
 import numpy as np
 
-from pdf2zh import settings
-from pdf2zh.casting import safe_float
-from pdf2zh.cmapdb import CMap, CMapBase, CMapDB
-from pdf2zh.pdfcolor import PREDEFINED_COLORSPACE, PDFColorSpace
-from pdf2zh.pdfdevice import PDFDevice, PDFTextSeq
-from pdf2zh.pdfexceptions import PDFException, PDFValueError
-from pdf2zh.pdffont import (
+import settings
+from casting import safe_float
+from cmapdb import CMap, CMapBase, CMapDB
+from pdfcolor import PREDEFINED_COLORSPACE, PDFColorSpace
+from pdfdevice import PDFDevice, PDFTextSeq
+from pdfexceptions import PDFException, PDFValueError
+from pdffont import (
     PDFCIDFont,
     PDFFont,
     PDFFontError,
@@ -18,8 +18,8 @@ from pdf2zh.pdffont import (
     PDFType1Font,
     PDFType3Font,
 )
-from pdf2zh.pdfpage import PDFPage
-from pdf2zh.pdftypes import (
+from pdfpage import PDFPage
+from pdftypes import (
     LITERALS_ASCII85_DECODE,
     PDFObjRef,
     PDFStream,
@@ -28,8 +28,8 @@ from pdf2zh.pdftypes import (
     resolve1,
     stream_value,
 )
-from pdf2zh.psexceptions import PSEOF, PSTypeError
-from pdf2zh.psparser import (
+from psexceptions import PSEOF, PSTypeError
+from psparser import (
     KWD,
     LIT,
     PSKeyword,
@@ -39,7 +39,7 @@ from pdf2zh.psparser import (
     keyword_name,
     literal_name,
 )
-from pdf2zh.utils import (
+from utils import (
     MATRIX_IDENTITY,
     Matrix,
     PathSegment,

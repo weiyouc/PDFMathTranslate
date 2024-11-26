@@ -16,8 +16,8 @@ from typing import (
     cast,
 )
 
-import settings
-from cmapdb import (
+from . import settings
+from .cmapdb import (
     CMap,
     CMapBase,
     CMapDB,
@@ -26,10 +26,10 @@ from cmapdb import (
     IdentityUnicodeMap,
     UnicodeMap,
 )
-from encodingdb import EncodingDB, name2unicode
-from fontmetrics import FONT_METRICS
-from pdfexceptions import PDFException, PDFKeyError, PDFValueError
-from pdftypes import (
+from .encodingdb import EncodingDB, name2unicode
+from .fontmetrics import FONT_METRICS
+from .pdfexceptions import PDFException, PDFKeyError, PDFValueError
+from .pdftypes import (
     PDFStream,
     dict_value,
     int_value,
@@ -39,8 +39,8 @@ from pdftypes import (
     resolve_all,
     stream_value,
 )
-from psexceptions import PSEOF
-from psparser import (
+from .psexceptions import PSEOF
+from .psparser import (
     KWD,
     LIT,
     PSKeyword,
@@ -48,7 +48,7 @@ from psparser import (
     PSStackParser,
     literal_name,
 )
-from utils import Matrix, Point, Rect, apply_matrix_norm, choplist, nunpack
+from .utils import Matrix, Point, Rect, apply_matrix_norm, choplist, nunpack
 
 if TYPE_CHECKING:
     from pdfinterp import PDFResourceManager

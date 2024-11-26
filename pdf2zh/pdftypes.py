@@ -15,14 +15,14 @@ from typing import (
 )
 from warnings import warn
 
-import pdfexceptions
-from ascii85 import ascii85decode, asciihexdecode
-from ccitt import ccittfaxdecode
-from lzw import lzwdecode
-from psparser import LIT, PSObject
-from runlength import rldecode
-from utils import apply_png_predictor
-import settings
+from . import pdfexceptions
+from .ascii85 import ascii85decode, asciihexdecode
+from .ccitt import ccittfaxdecode
+from .lzw import lzwdecode
+from .psparser import LIT, PSObject
+from .runlength import rldecode
+from .utils import apply_png_predictor
+from . import settings
 
 if TYPE_CHECKING:
     from pdfdocument import PDFDocument

@@ -6,20 +6,20 @@ from io import StringIO
 from typing import Any, BinaryIO, Container, Iterator, Optional, cast
 import tqdm
 
-from converter import (
+from .converter import (
     HOCRConverter,
     HTMLConverter,
     PDFPageAggregator,
     TextConverter,
     XMLConverter,
 )
-from image import ImageWriter
-from layout import LAParams, LTPage
-from pdfdevice import PDFDevice, TagExtractor
-from pdfexceptions import PDFValueError
-from pdfinterp import PDFPageInterpreter, PDFResourceManager
-from pdfpage import PDFPage
-from utils import AnyIO, FileOrName, open_filename
+from .image import ImageWriter
+from .layout import LAParams, LTPage
+from .pdfdevice import PDFDevice, TagExtractor
+from .pdfexceptions import PDFValueError
+from .pdfinterp import PDFPageInterpreter, PDFResourceManager
+from .pdfpage import PDFPage
+from .utils import AnyIO, FileOrName, open_filename
 import numpy as np
 from pymupdf import Document
 

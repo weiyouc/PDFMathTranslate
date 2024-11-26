@@ -2,17 +2,17 @@ import itertools
 import logging
 from typing import Any, BinaryIO, Container, Dict, Iterator, List, Optional, Set, Tuple
 
-import settings
-from pdfdocument import (
+from . import settings
+from .pdfdocument import (
     PDFDocument,
     PDFNoPageLabels,
     PDFTextExtractionNotAllowed,
 )
-from pdfexceptions import PDFObjectNotFound, PDFValueError
-from pdfparser import PDFParser
-from pdftypes import dict_value, int_value, list_value, resolve1
-from psparser import LIT
-from utils import parse_rect
+from .pdfexceptions import PDFObjectNotFound, PDFValueError
+from .pdfparser import PDFParser
+from .pdftypes import dict_value, int_value, list_value, resolve1
+from .psparser import LIT
+from .utils import parse_rect
 
 log = logging.getLogger(__name__)
 

@@ -16,8 +16,8 @@ from typing import (
     Union,
 )
 
-import psexceptions
-from utils import choplist
+from . import psexceptions
+from .utils import choplist
 
 log = logging.getLogger(__name__)
 

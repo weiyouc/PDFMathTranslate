@@ -24,7 +24,7 @@ from typing import (
     cast,
 )
 
-from pdfexceptions import PDFTypeError, PDFValueError
+from .pdfexceptions import PDFTypeError, PDFValueError
 
 if TYPE_CHECKING:
     from layout import LTComponent

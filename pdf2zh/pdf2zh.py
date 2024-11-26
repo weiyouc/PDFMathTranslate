@@ -74,7 +74,7 @@ def extract_text(
     **kwargs: Any,
 ) -> AnyIO:
     import doclayout_yolo
-    import high_level
+    from . import high_level
 
     if not files:
         raise PDFValueError("Must provide files to work upon!")

@@ -4,13 +4,13 @@ from io import BytesIO
 from typing import Dict, List, Mapping, Optional, Sequence, Tuple, Union, cast
 import numpy as np
 
-import settings
-from casting import safe_float
-from cmapdb import CMap, CMapBase, CMapDB
-from pdfcolor import PREDEFINED_COLORSPACE, PDFColorSpace
-from pdfdevice import PDFDevice, PDFTextSeq
-from pdfexceptions import PDFException, PDFValueError
-from pdffont import (
+from . import settings
+from .casting import safe_float
+from .cmapdb import CMap, CMapBase, CMapDB
+from .pdfcolor import PREDEFINED_COLORSPACE, PDFColorSpace
+from .pdfdevice import PDFDevice, PDFTextSeq
+from .pdfexceptions import PDFException, PDFValueError
+from .pdffont import (
     PDFCIDFont,
     PDFFont,
     PDFFontError,
@@ -18,8 +18,8 @@ from pdffont import (
     PDFType1Font,
     PDFType3Font,
 )
-from pdfpage import PDFPage
-from pdftypes import (
+from .pdfpage import PDFPage
+from .pdftypes import (
     LITERALS_ASCII85_DECODE,
     PDFObjRef,
     PDFStream,
@@ -28,8 +28,8 @@ from pdftypes import (
     resolve1,
     stream_value,
 )
-from psexceptions import PSEOF, PSTypeError
-from psparser import (
+from .psexceptions import PSEOF, PSTypeError
+from .psparser import (
     KWD,
     LIT,
     PSKeyword,
@@ -39,7 +39,7 @@ from psparser import (
     keyword_name,
     literal_name,
 )
-from utils import (
+from .utils import (
     MATRIX_IDENTITY,
     Matrix,
     PathSegment,

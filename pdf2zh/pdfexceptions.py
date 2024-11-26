@@ -1,4 +1,4 @@
-from psexceptions import PSException
+from .psexceptions import PSException
 
 
 class PDFException(PSException):

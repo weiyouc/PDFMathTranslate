@@ -22,17 +22,17 @@ from typing import (
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-import settings
-from arcfour import Arcfour
-from data_structures import NumberTree
-from pdfexceptions import (
+from . import settings
+from .arcfour import Arcfour
+from .data_structures import NumberTree
+from .pdfexceptions import (
     PDFException,
     PDFKeyError,
     PDFObjectNotFound,
     PDFTypeError,
 )
-from pdfparser import PDFParser, PDFStreamParser, PDFSyntaxError
-from pdftypes import (
+from .pdfparser import PDFParser, PDFStreamParser, PDFSyntaxError
+from .pdftypes import (
     DecipherCallable,
     PDFStream,
     decipher_all,
@@ -43,9 +43,9 @@ from pdftypes import (
     stream_value,
     uint_value,
 )
-from psexceptions import PSEOF
-from psparser import KWD, LIT, literal_name
-from utils import (
+from .psexceptions import PSEOF
+from .psparser import KWD, LIT, literal_name
+from .utils import (
     choplist,
     decode_text,
     format_int_alpha,

@@ -9,13 +9,13 @@ from typing import (
     cast,
 )
 
-import utils
-from pdfcolor import PDFColorSpace
-from pdffont import PDFFont, PDFUnicodeNotDefined
-from pdfpage import PDFPage
-from pdftypes import PDFStream
-from psparser import PSLiteral
-from utils import Matrix, PathSegment, Point, Rect
+from . import utils
+from .pdfcolor import PDFColorSpace
+from .pdffont import PDFFont, PDFUnicodeNotDefined
+from .pdfpage import PDFPage
+from .pdftypes import PDFStream
+from .psparser import PSLiteral
+from .utils import Matrix, PathSegment, Point, Rect
 
 if TYPE_CHECKING:
     from pdf2zh.pdfinterp import (

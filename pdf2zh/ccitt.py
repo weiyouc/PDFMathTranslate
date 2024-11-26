@@ -25,7 +25,7 @@ from typing import (
     cast,
 )
 
-from pdfexceptions import PDFException, PDFValueError
+from .pdfexceptions import PDFException, PDFValueError
 
 
 def get_bytes(data: bytes) -> Iterator[int]:

@@ -379,4 +379,4 @@ with gr.Blocks(title="PDF Translation", css="footer {display: none} .container {
         outputs=[translated_summary],
     )
 
-app.launch(debug=True, inbrowser=True, share=False)
+app.launch(debug=True, inbrowser=True, share=True)

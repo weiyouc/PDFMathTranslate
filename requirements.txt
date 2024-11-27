@@ -1,0 +1,5 @@
+gradio>=4.0.0
+pdf2image
+Pillow
+pytesseract
+requests 

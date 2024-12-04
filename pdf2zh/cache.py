@@ -81,3 +81,12 @@ def load_paragraph(hash_key, hash_key_paragraph):
 def write_paragraph(hash_key, hash_key_paragraph, paragraph):
     filename = os.path.join(cache_dir, hash_key, hash_key_paragraph)
     print(paragraph, file=open(filename, "w", encoding='utf-8'), end='')
+
+
+def clear_cache():
+    dirs = get_dirs()
+    for dir in dirs:
+        try:
+            shutil.rmtree(dir)
+        except Exception:
+            pass  # Ignore any errors during deletion

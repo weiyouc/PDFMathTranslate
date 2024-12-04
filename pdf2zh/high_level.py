@@ -5,6 +5,8 @@ import sys
 from io import StringIO
 from typing import Any, BinaryIO, Container, Iterator, Optional, cast
 import tqdm
+import os
+import shutil
 
 from .converter import (
     HOCRConverter,
@@ -22,6 +24,7 @@ from .pdfpage import PDFPage
 from .utils import AnyIO, FileOrName, open_filename
 import numpy as np
 from pymupdf import Document
+from . import cache  # Add this import at the top with other imports
 
 
 def extract_text_to_fp(
@@ -196,6 +199,10 @@ def extract_text_to_fp(
     return obj_patch
 
 
+def clear_cache():
+    """Clear the temporary cache files."""
+    cache.clear_cache()
+
 def extract_text(
     pdf_file: FileOrName,
     password: str = "",
@@ -204,6 +211,7 @@ def extract_text(
     caching: bool = True,
     codec: str = "utf-8",
     laparams: Optional[LAParams] = None,
+    clearcache: bool = False,
 ) -> str:
     """Parse and return the text contained in a PDF file.
 
@@ -216,10 +224,31 @@ def extract_text(
     :param codec: Text decoding codec
     :param laparams: An LAParams object from pdf2zh.layout. If None, uses
         some default settings that often work well.
+    :param clearcache: If True, clear the cache before processing
     :return: a string containing all of the text extracted.
     """
+    if clearcache:
+        clear_cache()
+
     if laparams is None:
         laparams = LAParams()
+
+    # Modify the model loading section
+    try:
+        model_url = "https://huggingface.co/wujing13/doclayout-yolo/resolve/main/doclayout-yolo.pt"
+        model_path = os.path.join(os.path.expanduser("~"), ".cache", "pdf2zh", "doclayout-yolo.pt")
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        
+        # Verify existing model file or download new one
+        if not os.path.exists(model_path) or os.path.getsize(model_path) < 1024:
+            download_model(model_url, model_path)
+        
+        # Verify the downloaded file
+        verify_model_file(model_path)
+        
+        model = load_model_with_retry(model_path, model_url)
+    except Exception as e:
+        raise RuntimeError(f"Failed to load model: {str(e)}") from e
 
     with open_filename(pdf_file, "rb") as fp, StringIO() as output_string:
         fp = cast(BinaryIO, fp)  # we opened in binary mode
@@ -277,3 +306,58 @@ def extract_pages(
             interpreter.process_page(page)
             layout = device.get_result()
             yield layout
+
+
+def verify_model_file(model_path):
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file not found: {model_path}")
+    
+    # Check file size is reasonable (not empty or too small)
+    if os.path.getsize(model_path) < 1024:  # Less than 1KB
+        os.remove(model_path)  # Remove corrupted file
+        raise ValueError(f"Model file seems too small: {model_path}")
+    
+    # Check file header (first few bytes)
+    with open(model_path, 'rb') as f:
+        header = f.read(10)
+        if header.startswith(b'<!') or header.startswith(b'<html'):
+            os.remove(model_path)  # Remove HTML file
+            raise ValueError(f"File appears to be HTML, not a PyTorch model: {model_path}")
+
+def download_model(model_url: str, model_path: str) -> None:
+    """Download the model file from the given URL."""
+    import requests
+    import shutil
+    
+    print(f"Downloading model from {model_url}...")
+    # Add headers to avoid redirects to HTML pages
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    }
+    
+    response = requests.get(model_url, stream=True, headers=headers, allow_redirects=True)
+    response.raise_for_status()
+    
+    # Check if the response is actually a model file and not HTML
+    content_type = response.headers.get('content-type', '')
+    if 'text/html' in content_type or response.content.startswith(b'<!DOCTYPE'):
+        raise ValueError(f"Received HTML instead of model file. Status code: {response.status_code}")
+    
+    with open(model_path, 'wb') as f:
+        shutil.copyfileobj(response.raw, f)
+    print("Model downloaded successfully!")
+
+def load_model_with_retry(model_path: str, model_url: str) -> Any:
+    """Try to load model, redownload if corrupted."""
+    try:
+        model = doclayout_yolo.YOLOv10(model_path)
+        return model
+    except Exception as e:
+        if "invalid load key" in str(e):
+            print("Model file appears to be corrupted. Attempting to redownload...")
+            if os.path.exists(model_path):
+                os.remove(model_path)
+            download_model(model_url, model_path)
+            # Try loading again with fresh download
+            return doclayout_yolo.YOLOv10(model_path)
+        raise e  # Re-raise if it's not a corruption error

@@ -71,10 +71,14 @@ def extract_text(
     lang_in: str = "",
     lang_out: str = "",
     service: str = "",
+    clearcache: bool = False,
     **kwargs: Any,
 ) -> AnyIO:
     import doclayout_yolo
     from . import high_level
+
+    if clearcache:
+        high_level.clear_cache()
 
     if not files:
         raise PDFValueError("Must provide files to work upon!")
@@ -225,6 +229,12 @@ def create_parser() -> argparse.ArgumentParser:
         type=int,
         default=4,
         help="The number of threads to execute translation.",
+    )
+    parser.add_argument(
+        "--clearcache",
+        action="store_true",
+        help="Clear the cache before processing",
+        default=False
     )
 
     return parser
